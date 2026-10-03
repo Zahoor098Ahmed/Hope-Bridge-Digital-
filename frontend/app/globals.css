@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+/* ---------- Design tokens -> Tailwind utilities ---------- */
+@theme {
+  /* Warm paper + deep ink: calm, premium, high contrast */
+  --color-bg: #faf7f2;
+  --color-bg-alt: #f3eee6;
+  --color-surface: #ffffff;
+  --color-ink: #12142b;
+  --color-ink-soft: #3d4060;
+  --color-muted: #6e7191;
+  --color-line: #e7e1d7;
+  --color-brand: #4b52d6;
+  --color-brand-soft: #e9eaff;
+  --color-gold: #f2b84b;
+  --color-sun: #ffc75f;
+  --color-sky: #dff1ff;
+  --color-mint: #dcf5ea;
+  --color-peach: #ffe9de;
+  --color-lavender: #ece6ff;
+  --color-night: #0f1126;
+  --color-night-2: #181b38;
+  --color-violet: #7a5af5;
+  --color-emerald: #12a37b;
+  --color-coral: #f0784a;
+
+  /* Layered shadows read as "real" depth */
+  --shadow-soft: 0 1px 2px rgb(18 20 43 / 0.04), 0 4px 12px -2px rgb(18 20 43 / 0.06);
+  --shadow-lift: 0 1px 2px rgb(18 20 43 / 0.04), 0 12px 32px -8px rgb(18 20 43 / 0.14), 0 32px 64px -24px rgb(18 20 43 / 0.12);
+  --shadow-float: 0 2px 4px rgb(18 20 43 / 0.04), 0 24px 48px -12px rgb(18 20 43 / 0.22);
+  --shadow-phone: 0 50px 100px -30px rgb(18 20 43 / 0.5), 0 30px 60px -30px rgb(18 20 43 / 0.45);
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-ring: ring 1s ease-in-out infinite;
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-fade-up: fade-up 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+
+  @keyframes float {
+    50% { translate: 0 -12px; }
+  }
+  @keyframes ring {
+    50% { box-shadow: 0 0 0 10px color-mix(in srgb, var(--accent) 25%, transparent); }
+  }
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(16px); }
+  }
+}
+
+/* Per-element app colour: set --accent / --accent-soft inline (see accent() in lib/apps.ts). */
+@theme inline {
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --font-sans: var(--font-jakarta), system-ui, sans-serif;
+  --font-head: var(--font-jakarta), system-ui, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, serif;
+}
+
+@custom-variant calm (&:where([data-calm="true"], [data-calm="true"] *));
+
+/* Fine film grain that makes flat colour feel printed. */
+@utility bg-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Faint blueprint grid used behind product "stages". */
+@utility bg-dots {
+  background-image: radial-gradient(color-mix(in srgb, var(--color-ink) 12%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@layer base {
+  :root {
+    --accent: var(--color-brand);
+    --accent-soft: var(--color-brand-soft);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --color-bg: #0f1126;
+      --color-bg-alt: #151833;
+      --color-surface: #1b1e3d;
+      --color-ink: #f3f1ea;
+      --color-ink-soft: #cfd0e6;
+      --color-muted: #9fa2c2;
+      --color-line: #2a2e55;
+      --color-brand: #8d96ff;
+      --color-brand-soft: #262b5a;
+      --color-sky: #1f3550;
+      --color-mint: #1b3a33;
+      --color-peach: #3d2a26;
+      --color-lavender: #2c2851;
+      --color-night: #080917;
+      --color-night-2: #11132a;
+    }
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-bg font-sans text-[17px] leading-relaxed text-ink antialiased overflow-x-hidden;
+    font-feature-settings: "ss01", "cv11";
+  }
+  h1, h2 {
+    @apply font-display font-medium;
+    font-variation-settings: "SOFT" 100;
+  }
+  h3, h4 { @apply font-sans font-bold tracking-tight; }
+  ::selection { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+  :focus-visible { @apply rounded-lg outline-3 outline-offset-3 outline-brand; }
+
+  /* Calm mode and reduced motion: no movement anywhere. */
+  html[data-calm="true"] *, html[data-calm="true"] *::before, html[data-calm="true"] *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
