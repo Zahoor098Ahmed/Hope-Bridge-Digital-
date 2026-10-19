@@ -1,4 +1,4 @@
-import { MessageCircleHeart, Sprout, Target } from "lucide-react";
+import { HeartHandshake, MessageCircleHeart, Sprout, Target } from "lucide-react";
 import type { AppInfo } from "@/lib/apps";
 import { cx } from "./ui";
 
@@ -6,6 +6,7 @@ const marks = {
   "angel-talk": MessageCircleHeart,
   bloomlearn: Sprout,
   "bloom-focus": Target,
+  "nexia-bridge": HeartHandshake,
 };
 
 const sizes = {

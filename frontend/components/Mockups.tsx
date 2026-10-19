@@ -95,7 +95,7 @@ export function AngelTalkPhone({ className }: { className?: string }) {
             </div>
           ))}
         </div>
-        <MiniChips items={["English", "العربية", "اردو", "हिन्दी"]} />
+        <MiniChips items={["English", "العربية"]} />
       </ScreenBody>
     </Phone>
   );
@@ -188,8 +188,63 @@ export function BloomFocusPhone({ className }: { className?: string }) {
   );
 }
 
+const nexiaTabs: [string, string][] = [
+  ["🏠", "Home"],
+  ["📈", "Progress"],
+  ["🎯", "Targets"],
+  ["💬", "Messages"],
+];
+
+export function NexiaBridgePhone({ className }: { className?: string }) {
+  return (
+    <Phone className={className} label="Nexia Bridge parent portal with progress, home tasks and a message from the therapist">
+      <ScreenHead title="Nexia Bridge" right="🔔" />
+      <ScreenBody>
+        <div className="flex items-center gap-2 rounded-2xl bg-[#f4eee6] p-2.5">
+          <span className="grid size-9 place-items-center rounded-full bg-[#4f46e5] text-sm font-extrabold text-white">A</span>
+          <span className="leading-tight">
+            <span className="block font-extrabold">Adam · Age 6</span>
+            <span className="text-[10px] text-[#6e7191]">Parent portal</span>
+          </span>
+          <span className="ml-auto rounded-full bg-[#ffe4ea] px-2 py-0.5 text-[9.5px] font-extrabold text-[#e11d48]">2 new</span>
+        </div>
+        <div className="rounded-2xl border border-[#e8e2d9] p-2.5">
+          <div className="mb-1.5 flex justify-between text-[10.5px] font-extrabold">
+            <span>Today&apos;s home practice</span>
+            <span className="text-[#4f46e5]">3 / 4</span>
+          </div>
+          <div className="h-2 overflow-hidden rounded-full bg-[#eeeaf9]">
+            <div className="h-full w-3/4 rounded-full bg-[#4f46e5]" />
+          </div>
+          <div className="mt-2 grid gap-1 text-[10.5px] font-bold">
+            {["Request with a picture card", "Brush teeth: 5 steps", "Name 3 feelings"].map((t) => (
+              <span key={t} className="flex items-center gap-1.5">
+                <span className="grid size-3.5 place-items-center rounded-full bg-[#12a37b] text-[8px] text-white">✓</span>
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="rounded-2xl rounded-tl-sm bg-[#eef0ff] p-2.5 text-[10.5px] leading-snug">
+          <span className="mb-0.5 block font-extrabold text-[#4f46e5]">Speech therapist</span>
+          Great work this week! New target added: two-word requests. ✓✓
+        </div>
+        <div className="mt-auto grid grid-cols-4 rounded-2xl border border-[#e8e2d9] p-1.5 text-center text-[9px] font-bold">
+          {nexiaTabs.map(([e, l], i) => (
+            <span key={l} className={i === 0 ? "rounded-xl bg-[#eef0ff] py-1 text-[#4f46e5]" : "py-1 text-[#6e7191]"}>
+              <span className="block text-sm">{e}</span>
+              {l}
+            </span>
+          ))}
+        </div>
+      </ScreenBody>
+    </Phone>
+  );
+}
+
 export const phones = {
   "angel-talk": AngelTalkPhone,
   bloomlearn: BloomLearnPhone,
   "bloom-focus": BloomFocusPhone,
+  "nexia-bridge": NexiaBridgePhone,
 } as const;

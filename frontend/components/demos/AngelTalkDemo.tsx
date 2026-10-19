@@ -153,7 +153,7 @@ export function AngelTalkDemo() {
       <p className={demoNoteClass}>
         {noVoice
           ? "Your browser doesn't support spoken voice, but the app speaks every tile out loud."
-          : "Turn your sound on. This preview uses your browser's voice; the app offers boy, girl, woman and man voices in six languages."}
+          : "Turn your sound on. This preview uses your browser's voice; the app offers boy, girl, woman and man voices in English and Arabic."}
       </p>
     </div>
   );

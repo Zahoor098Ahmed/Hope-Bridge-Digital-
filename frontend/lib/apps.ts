@@ -13,7 +13,7 @@ export type Comparison = {
 export type Faq = { q: string; a: string };
 
 export type AppInfo = {
-  slug: "angel-talk" | "bloomlearn" | "bloom-focus";
+  slug: "angel-talk" | "bloomlearn" | "bloom-focus" | "nexia-bridge";
   name: string;
   emoji: string;
   accent: string;
@@ -48,12 +48,12 @@ export const apps: AppInfo[] = [
       "A gentle AAC app that helps non-verbal and speech-delayed children say what they need, feel and think by tapping pictures that speak out loud.",
     intro:
       "A child taps a picture and Angel Talk speaks it. Tap several pictures and it builds and speaks a full sentence, like “I want water” or “I feel tired”. Behind a parent PIN, caregivers can build the child's whole vocabulary in minutes, even just by speaking.",
-    platforms: ["Web", "Android", "iOS"],
-    languages: ["English", "العربية", "اردو", "हिन्दी", "Español", "Français"],
+    platforms: ["Android", "iOS"],
+    languages: ["English", "العربية"],
     highlights: [
       "Picture tiles that speak instantly, plus a sentence builder",
       "Build a whole board with one spoken sentence",
-      "Full boards in English, Arabic, Urdu, Hindi, Spanish and French",
+      "Full boards in English and Arabic",
       "Social stories, visual schedule, games and calm tools in one app",
     ],
     audience: [
@@ -63,7 +63,7 @@ export const apps: AppInfo[] = [
       { who: "Parents & families", how: "Build a personal board in about 90 seconds, with no technical skills needed." },
       { who: "Special-education teachers & schools", how: "Bulk-create classroom vocabulary, schedules and learning games." },
       { who: "Speech-language therapists", how: "Verb-form teaching, sentence building, therapy goals and a caregiver journal." },
-      { who: "Arabic- and Urdu-speaking families", how: "A complete board in their home language, with tiles that can show two languages at once." },
+      { who: "Arabic-speaking families", how: "A complete board in Arabic, with tiles that can show English and Arabic at once." },
     ],
     features: [
       {
@@ -96,7 +96,7 @@ export const apps: AppInfo[] = [
           "Filler words are removed automatically",
           "Tolerates common speech-recognition mistakes",
           "Review and edit everything before it is saved",
-          "Works with Arabic and Urdu voice commands",
+          "Works with Arabic voice commands",
         ],
       },
       {
@@ -143,7 +143,7 @@ export const apps: AppInfo[] = [
       columns: ["", "Angel Talk", "Premium AAC apps", "Free AAC boards"],
       rows: [
         ["Price", "Affordable, no lock-in", "Typically $250–$300, iOS-focused", "Free"],
-        ["Arabic & Urdu boards", "✅ Full app and vocabulary", "❌ Not in most", "⚠️ Community translations"],
+        ["Arabic boards", "✅ Full app and vocabulary", "❌ Not in most", "⚠️ Community translations"],
         ["Two languages on one tile", "✅", "❌ Rare", "❌ Rare"],
         ["Build a board by one voice command", "✅", "❌ Manual editing", "❌ Manual editing"],
         ["Automatic verb forms with badges", "✅", "⚠️ Mostly manual", "❌"],
@@ -154,7 +154,7 @@ export const apps: AppInfo[] = [
       note: "Premium examples: Proloquo2Go, TouchChat, LAMP WFL. Free example: Cboard. Competitor details are based on publicly available information and may change.",
     },
     why: [
-      { title: "Built for South-Asian and Arab families", text: "Urdu and Arabic are first-class languages, not an afterthought." },
+      { title: "Built for Arabic-speaking families", text: "Arabic is a first-class language, not an afterthought." },
       { title: "Faster to set up", text: "Say it once, and the board is ready." },
       { title: "Teaches language, not just requests", text: "Verb forms, sentence building and social stories grow with the child." },
       { title: "One app instead of five", text: "Talk board, schedule, stories, games and calm tools together." },
@@ -178,7 +178,7 @@ export const apps: AppInfo[] = [
       "BloomLearn turns words into pictures. Speak or type a sentence and BloomLearn draws it on screen right away, so children see what language means.",
     intro:
       "A child or teacher says “three red apples under the table”, and BloomLearn draws exactly that. Children see colours, numbers, actions and positions come to life, and they can keep talking to change the picture step by step.",
-    platforms: ["Android"],
+    platforms: ["Android", "iOS"],
     languages: ["English", "العربية"],
     highlights: [
       "Any typed or spoken sentence becomes a picture",
@@ -289,8 +289,8 @@ export const apps: AppInfo[] = [
       "Playful attention training that adapts to every child, guided by their therapist and practised at home with their favourite heroes.",
     intro:
       "Children play short, game-based sessions that adapt in real time: harder when they are ready, gentler when they need support. Therapists build personalised activities and follow progress, while parents start the day's training at home and stay in touch through private messaging.",
-    platforms: ["iOS", "Android", "Web"],
-    languages: ["English"],
+    platforms: ["Android", "iOS"],
+    languages: ["English", "العربية"],
     highlights: [
       "15 adaptive focus games training 12+ attention skills",
       "40 heroes in 8 worlds cheer every win",
@@ -400,6 +400,136 @@ export const apps: AppInfo[] = [
       "Bloom Focus supports therapy and practice at home. It is not a medical device and does not diagnose or treat any condition. Always follow the guidance of your child's healthcare professional.",
     credits: "Hero artwork: Microsoft Fluent Emoji 3D (MIT licence).",
     taglines: ["Little minds. Big focus.", "Where therapy meets play, every day."],
+  },
+  {
+    slug: "nexia-bridge",
+    name: "Nexia Bridge",
+    emoji: "🤝",
+    accent: "#4f46e5",
+    tagline: "One child. One team. One shared picture.",
+    category: "Therapy & education platform",
+    summary:
+      "A therapy and education platform for autistic children where the parent, therapists, teachers and supervisor all work on one shared picture of the child, each in their own portal.",
+    intro:
+      "Every child has one team, and Nexia Bridge gives that team one shared record. Therapists plan and run sessions, teachers follow classroom progress, supervisors review the work, and parents see progress, do home practice and message the team, with each person seeing only what their role needs.",
+    platforms: ["Android", "iOS"],
+    languages: ["English", "العربية"],
+    highlights: [
+      "Eight portals: parent, behavior, speech, OT, remedial, teacher, supervisor and admin",
+      "The therapist's Plan decides which tools and datasheets appear on Today",
+      "WhatsApp-style family chat and home tasks between parents and therapists",
+      "English and Arabic, with full right-to-left layout",
+    ],
+    audience: [
+      { who: "Parents & caregivers", how: "See today's progress, targets and sessions, tick off home practice, message the therapist and open Child Mode." },
+      { who: "Behavior (ABA) therapists", how: "Plan-driven datasheets, targets with mastery levels, graphs, the BIP with ABC log, function and reinforcers, and notes." },
+      { who: "Speech therapists (SLP)", how: "Goals, drills and practice for sentences, articulation and recordings, with graphs and notes." },
+      { who: "Occupational therapists", how: "Checklists, goals and tools such as the sensory diet and task analysis, chosen in the Plan." },
+      { who: "Remedial & classroom teachers", how: "Today, goals or students, graphs, notes and a Family tab for staying in touch with parents." },
+      { who: "Clinical supervisors", how: "Review new goals and sessions, observe staff, give feedback, and publish reports and templates." },
+      { who: "Centres & administrators", how: "Manage accounts, centres, cases and invoices, seeing counts and summaries only, never clinical notes." },
+    ],
+    features: [
+      {
+        icon: "Users",
+        title: "One child, one team",
+        items: [
+          "Everyone assigned to a child shares one record",
+          "Parent, therapists, teachers and supervisor see the same picture",
+          "A child switcher in the header for staff with several children",
+          "Supervisors can ask the administrator to change a case's team",
+        ],
+      },
+      {
+        icon: "ClipboardList",
+        title: "The Plan drives the tools",
+        items: [
+          "Therapists choose goals and tools in the Plan",
+          "Today then shows only those tools and datasheets",
+          "Targets with mastery levels and graphs of trends",
+          "Speech exercises and OT tools such as the sensory diet",
+        ],
+      },
+      {
+        icon: "MessagesSquare",
+        title: "Family chat & home tasks",
+        items: [
+          "WhatsApp-style chat between the parent and a therapist",
+          "Read marks and small attachments, kept inside the app",
+          "Therapists set home tasks; parents tick them off and add a note",
+          "Colleague-only messages are never sent to parents",
+        ],
+      },
+      {
+        icon: "Mic",
+        title: "Notes & dictation",
+        items: [
+          "SOAP-style session notes with an archive",
+          "Type notes, or dictate them in the browser",
+          "Session summaries saved from Today",
+          "Supervisors review sessions and send feedback",
+        ],
+      },
+      {
+        icon: "ShieldCheck",
+        title: "Everyone sees only their part",
+        items: [
+          "One portal per role: a parent never sees therapist tools",
+          "Parents never see raw clinical logs or ABC events",
+          "Administrators see counts and summaries, never notes or messages",
+          "Parents decide which professionals can see their child",
+        ],
+      },
+      {
+        icon: "Building2",
+        title: "For centres & supervisors",
+        items: [
+          "Review queue for new goals and saved sessions",
+          "Staff observation, feedback, reports and templates",
+          "Cases, centres, team transfers and archive",
+          "Invoice records (draft, issued, paid, void) and an audit log",
+        ],
+      },
+    ],
+    steps: [
+      { title: "The parent checks in", text: "Signs in, sees today's progress and home practice, ticks off tasks and sends a message." },
+      { title: "The therapist plans and runs", text: "Builds the Plan, runs the session from Today, saves a summary, writes a note and replies to the family." },
+      { title: "The supervisor reviews", text: "Approves new goals and sessions or sends feedback, observes staff and publishes reports." },
+    ],
+    comparisonTitle: "Who sees what",
+    comparison: {
+      columns: ["", "Parent", "Therapist / Teacher", "Supervisor", "Administrator"],
+      rows: [
+        ["Targets and goals", "Read", "Read and write", "Read and write", "Read"],
+        ["Session summaries", "Read", "Read and write", "Read and review", "Summary only"],
+        ["Home tasks", "Read, tick off, add a note", "Read and write", "Read", "Completion status"],
+        ["ABC events", "❌", "Read and write", "Read", "❌"],
+        ["Behavior plan (BIP)", "Read once not a draft", "Read and write", "Read", "Status"],
+        ["Messages", "Family messages", "Read and write", "Read", "❌"],
+        ["Case notes and observations", "❌", "Staff only", "Staff only", "❌"],
+        ["Accounts, centres, billing", "❌", "❌", "❌", "✅"],
+      ],
+      note: "A parent can only ever see their own child.",
+    },
+    why: [
+      { title: "One shared picture", text: "No more scattered updates: the whole team works from the same record of the child." },
+      { title: "Right tools for each role", text: "Eight portals, each showing only what that person needs." },
+      { title: "Parents stay in the loop", text: "Progress, targets, home practice and messages, without raw clinical logs." },
+      { title: "Built for therapy teams", text: "ABA, speech, OT, remedial and classroom tools in one platform." },
+      { title: "English and Arabic", text: "Arabic switches the whole layout to right-to-left." },
+      { title: "Privacy by role", text: "Clear rules on who can see what, and parents decide who sees their child." },
+    ],
+    faq: [
+      { q: "Who is Nexia Bridge for?", a: "Therapy and education teams working with autistic children: parents, behavior, speech and occupational therapists, remedial and classroom teachers, supervisors and centre administrators." },
+      { q: "Can a parent see clinical notes?", a: "No. Parents see progress, targets, sessions, home practice and family messages. Case notes, observations and ABC events stay with staff." },
+      { q: "Can the administrator read messages or notes?", a: "No. Administrators manage accounts, centres, cases and invoices, and see counts and summaries only." },
+      { q: "Which languages does it support?", a: "English and Arabic. Arabic switches the whole layout to right-to-left." },
+      { q: "Does it take payments?", a: "No. Billing records invoices (draft, issued, paid, void) but does not take payments." },
+      { q: "Is there a mode for the child?", a: "Yes. Child Mode is a full-screen, large-button schedule for the child, with a button back to the adult portal." },
+    ],
+    disclaimer:
+      "Nexia Bridge supports therapy and education teams. It does not diagnose or treat any condition.",
+    taglines: ["One child. One team. One shared picture.", "Every professional, one shared picture of the child."],
   },
 ];
 

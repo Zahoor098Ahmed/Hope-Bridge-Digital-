@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: site.description,
-  keywords: ["autism app", "AAC app", "Urdu AAC", "Arabic AAC", "speech delay", "special education", "attention training", "Angel Talk", "BloomLearn", "Bloom Focus"],
+  keywords: ["autism app", "AAC app", "Arabic AAC", "Arabic autism app", "speech delay", "special education", "attention training", "Angel Talk", "BloomLearn", "Bloom Focus"],
   openGraph: {
     title: site.name,
     description: site.description,
@@ -30,7 +30,8 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${jakarta.variable}`} data-calm="false" suppressHydrationWarning>
+    // overflow-x-clip: the page can never be dragged sideways on phones, even if a child is too wide.
+    <html lang="en" className={`${fraunces.variable} ${jakarta.variable} overflow-x-clip`} data-calm="false" suppressHydrationWarning>
       <head>
         {/* Apply calm mode before paint so sensitive visitors never see motion. */}
         <script

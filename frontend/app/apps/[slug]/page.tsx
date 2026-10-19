@@ -1,16 +1,38 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { ArrowUpRight, Check, Plus, Sparkles, Volume2 } from "lucide-react";
+import {
+  ArrowUpRight,
+  CircleCheck,
+  CircleX,
+  Egg,
+  Fish,
+  Hash,
+  MapPin,
+  Palette,
+  PersonStanding,
+  Plus,
+  Rocket,
+  Sparkles,
+  Tractor,
+  TreePalm,
+  TriangleAlert,
+  Trophy,
+  Volume2,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
 import { apps, accent, focusGames, getApp, heroWorlds, type AppInfo } from "@/lib/apps";
 import { phones } from "@/components/Mockups";
 import { AppMark } from "@/components/AppMark";
 import { Icon } from "@/components/Icon";
 import { Reveal } from "@/components/Reveal";
 import { Spotlight } from "@/components/Spotlight";
+import { DownloadPanel, StoreBadges } from "@/components/StoreBadges";
 import { AngelTalkDemo } from "@/components/demos/AngelTalkDemo";
 import { BloomLearnDemo } from "@/components/demos/BloomLearnDemo";
 import { BloomFocusDemo } from "@/components/demos/BloomFocusDemo";
+import { NexiaBridgeDemo } from "@/components/demos/NexiaBridgeDemo";
 import {
   ButtonLink,
   Chip,
@@ -60,13 +82,18 @@ const demos = {
     title: <>Feelings first, <span className={emClass}>then focus.</span></>,
     text: "Every session starts by asking how the child feels. Try a happy face, then try a tired or worried one.",
   },
+  "nexia-bridge": {
+    Demo: NexiaBridgeDemo,
+    title: <>One child. <span className={emClass}>Every role sees its part.</span></>,
+    text: "Open the same child as a parent, therapist, supervisor or administrator, and see what each portal shows and keeps private.",
+  },
 } as const;
 
 // Two floating notes around the phone in each app's hero.
 const heroNotes: Record<AppInfo["slug"], [string, string][]> = {
   "angel-talk": [
     ["Spoken aloud", "“I feel tired.”"],
-    ["Two languages, one tile", "English + Urdu or Arabic"],
+    ["Two languages, one tile", "English + Arabic"],
   ],
   bloomlearn: [
     ["Understands", "under · on · behind · beside"],
@@ -75,6 +102,10 @@ const heroNotes: Record<AppInfo["slug"], [string, string][]> = {
   "bloom-focus": [
     ["Always just right", "Steps up above 85% accuracy"],
     ["Today's training", "4 games with Rexy Roarson"],
+  ],
+  "nexia-bridge": [
+    ["One shared picture", "Parent · Therapists · Teachers"],
+    ["Eight portals", "Each role sees only its part"],
   ],
 };
 
@@ -94,6 +125,7 @@ export default async function AppPage({ params }: Props) {
     ["#how", "How it works"],
     ["#compare", "Compare"],
     ...(app.faq ? ([["#faq", "FAQ"]] as [string, string][]) : []),
+    ["#download", "Download"],
   ];
 
   // Bento: when the last row would hold two cards, let the first card span two columns.
@@ -157,6 +189,7 @@ export default async function AppPage({ params }: Props) {
                 Request access
               </ButtonLink>
             </div>
+            <StoreBadges app={app} className="mt-8" />
           </div>
 
           {/* Stage */}
@@ -166,9 +199,14 @@ export default async function AppPage({ params }: Props) {
               <div aria-hidden="true" className="absolute top-1/2 left-1/2 -z-10 size-[400px] -translate-1/2 rounded-full bg-accent/30 blur-[90px]" />
               <PhoneEl className="animate-float" />
             </div>
-            <GlassCard className="absolute top-10 -left-2 z-10 max-w-[220px] sm:-left-8">
+            <GlassCard className="absolute top-[40%] -left-2 z-10 max-w-[220px] sm:-left-8">
               <div className="mb-1 flex items-center gap-1.5 text-[0.66rem] font-semibold uppercase tracking-[0.14em] text-[#6e7191]">
-                <Volume2 size={12} aria-hidden="true" style={{ color: app.accent }} /> {noteA[0]}
+                {app.slug === "angel-talk" ? (
+                  <Volume2 size={12} aria-hidden="true" style={{ color: app.accent }} />
+                ) : (
+                  <Sparkles size={12} aria-hidden="true" style={{ color: app.accent }} />
+                )}{" "}
+                {noteA[0]}
               </div>
               <p className="font-display text-[1.02rem] leading-snug italic">{noteA[1]}</p>
             </GlassCard>
@@ -346,7 +384,7 @@ export default async function AppPage({ params }: Props) {
                             i > 1 && "text-ink-soft"
                           )}
                         >
-                          {cell}
+                          <CompareCell value={cell} />
                         </td>
                       ))}
                     </tr>
@@ -359,29 +397,11 @@ export default async function AppPage({ params }: Props) {
         </Container>
       </Section>
 
-      {/* ───────────── Why ───────────── */}
-      <Section tone="alt">
-        <Container>
-          <SectionHead index="06" kicker="Why families choose it" title={<>Why <span className={emClass}>{app.name}</span>?</>} />
-          <div className="grid gap-px overflow-hidden rounded-[28px] border border-line bg-line md:grid-cols-2 lg:grid-cols-3">
-            {app.why.map((w, i) => (
-              <Reveal key={w.title} delay={(i % 3) * 70} className="bg-surface p-7 sm:p-9">
-                <span className="mb-6 grid size-9 place-items-center rounded-full bg-accent text-white">
-                  <Check size={18} strokeWidth={2.4} aria-hidden="true" />
-                </span>
-                <h3 className="mb-2 text-lg">{w.title}</h3>
-                <p className="text-ink-soft">{w.text}</p>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
       {/* ───────────── FAQ ───────────── */}
       {app.faq && (
         <Section id="faq" className="scroll-mt-36">
           <Container className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-            <SectionHead align="left" index="07" kicker="FAQ" title={<>Questions <span className={emClass}>parents ask</span></>} className="lg:mb-0" />
+            <SectionHead align="left" index="06" kicker="FAQ" title={<>Questions <span className={emClass}>parents ask</span></>} className="lg:mb-0" />
             <div className="divide-y divide-line border-y border-line">
               {app.faq.map((f) => (
                 <details key={f.q} className="group">
@@ -402,25 +422,11 @@ export default async function AppPage({ params }: Props) {
         </Section>
       )}
 
-      {/* ───────────── CTA ───────────── */}
-      <Section className="pt-0">
+      {/* ───────────── Download + benefits ───────────── */}
+      <Section id="download" className="scroll-mt-36">
         <Container>
           <Reveal>
-            <div className="relative isolate overflow-hidden rounded-[40px] bg-night px-6 py-16 text-center text-white sm:px-12 sm:py-24">
-              <div aria-hidden="true" className="absolute top-0 left-1/2 -z-10 h-80 w-[44rem] -translate-x-1/2 rounded-full bg-accent/50 blur-[120px]" />
-              <div aria-hidden="true" className="absolute inset-0 -z-10 bg-grain opacity-[0.08]" />
-              <AppMark app={app} size="lg" className="mx-auto mb-8" />
-              <h2 className={cx(h2Class, "mx-auto max-w-[820px]")}>{app.taglines[0]}</h2>
-              <p className="mx-auto mt-5 mb-9 max-w-[560px] text-lg text-white/65">Ask us about access for your family, classroom or clinic.</p>
-              <div className="flex flex-wrap justify-center gap-3">
-                <ButtonLink href="/#contact" variant="white">
-                  Get in touch
-                </ButtonLink>
-                <ButtonLink href="#try" variant="outline">
-                  Try the demo again
-                </ButtonLink>
-              </div>
-            </div>
+            <DownloadPanel app={app} />
           </Reveal>
           {(app.disclaimer || app.credits) && (
             <div className={cx(noticeClass, "mt-6 grid gap-2")}>
@@ -449,14 +455,20 @@ export default async function AppPage({ params }: Props) {
                 <Link
                   href={`/apps/${o.slug}`}
                   style={accent(o.accent)}
-                  className="group flex items-center gap-5 rounded-[28px] border border-line bg-surface p-6 no-underline shadow-soft transition duration-500 hover:-translate-y-1 hover:shadow-lift sm:p-8"
+                  className="group flex items-center gap-4 rounded-[28px] border border-line bg-surface p-5 no-underline shadow-soft transition duration-500 hover:-translate-y-1 hover:shadow-lift sm:gap-5 sm:p-8"
                 >
-                  <AppMark app={o} size="lg" />
+                  {/* Smaller icon and no arrow on phones, so the card never pushes past the screen edge. */}
+                  <span className="sm:hidden">
+                    <AppMark app={o} size="md" />
+                  </span>
+                  <span className="hidden sm:block">
+                    <AppMark app={o} size="lg" />
+                  </span>
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-display text-2xl font-medium tracking-[-0.02em] sm:text-3xl">{o.name}</h3>
+                    <h3 className="font-display text-[1.4rem] leading-tight font-medium tracking-[-0.02em] sm:text-3xl">{o.name}</h3>
                     <span className="text-muted">{o.tagline}</span>
                   </div>
-                  <span className="grid size-12 shrink-0 place-items-center rounded-full border border-line transition duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-white">
+                  <span className="hidden size-12 shrink-0 place-items-center rounded-full border border-line transition duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-white sm:grid">
                     <ArrowUpRight size={20} aria-hidden="true" />
                   </span>
                 </Link>
@@ -477,6 +489,17 @@ const verbForms: [string, string, string][] = [
 ];
 
 const treeList = "ml-2 list-none border-l border-dashed border-ink/20 py-1 pl-6";
+
+const nexiaPortals: [string, string][] = [
+  ["Parent", "Progress, home practice, messages and Child Mode"],
+  ["Behavior (ABA)", "Datasheets, targets, graphs, BIP and notes"],
+  ["Speech (SLP)", "Plan, drills, goals, practice and graphs"],
+  ["Occupational therapy", "Plan, tools, checklists, goals and graphs"],
+  ["Remedial", "Plan, goals, graphs and notes"],
+  ["Teacher", "Today, students, notes and Family"],
+  ["Supervisor", "Reviews, staff observation, reports and templates"],
+  ["Administrator", "Portals, cases, centres, billing and settings"],
+];
 
 function Extras({ app }: { app: AppInfo }) {
   if (app.slug === "angel-talk") {
@@ -543,6 +566,28 @@ function Extras({ app }: { app: AppInfo }) {
     );
   }
 
+  if (app.slug === "nexia-bridge") {
+    return (
+      <Section>
+        <Container>
+          <SectionHead kicker="Eight portals" title={<>One portal <span className={emClass}>for every role</span></>}>
+            On a phone the tabs sit in a bottom bar; on a computer they become a menu on the left. Supervisor and Administrator are
+            designed for a computer, with tables and side panels.
+          </SectionHead>
+          <div className="grid gap-px overflow-hidden rounded-[28px] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+            {nexiaPortals.map(([who, job], i) => (
+              <div key={who} className="bg-surface p-6 transition hover:bg-accent-soft">
+                <span className="mb-4 block font-display text-sm text-accent italic">{String(i + 1).padStart(2, "0")}</span>
+                <b className="mb-1 block font-semibold">{who}</b>
+                <span className="text-[0.9rem] text-muted">{job}</span>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
   if (app.slug === "bloom-focus") {
     return (
       <>
@@ -556,8 +601,11 @@ function Extras({ app }: { app: AppInfo }) {
               {heroWorlds.map((w, i) => (
                 <Reveal key={w.name} delay={(i % 4) * 60}>
                   <Spotlight>
-                    <span className="mb-6 grid size-14 place-items-center rounded-2xl bg-accent-soft text-3xl" aria-hidden="true">
-                      {w.emoji}
+                    <span className="mb-6 grid size-12 place-items-center rounded-2xl bg-accent-soft text-accent" aria-hidden="true">
+                      {(() => {
+                        const W = worldIcons[i];
+                        return <W size={22} strokeWidth={1.75} />;
+                      })()}
                     </span>
                     <h3 className="mb-2 text-lg">{w.name}</h3>
                     <p className="text-[0.9rem] text-muted">{w.heroes.join(" · ")}</p>
@@ -593,23 +641,48 @@ function Extras({ app }: { app: AppInfo }) {
         <SectionHead kicker="Words it understands" title={<>Colours, numbers, actions <span className={emClass}>and positions</span></>} />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            ["🎨", "Colours & sizes", "red, blue, big, small"],
-            ["🔢", "Numbers", "one, three, ten"],
-            ["🏃", "Actions", "running, sitting, jumping"],
-            ["📍", "Positions", "under, on, above, behind, in front of, beside, inside"],
-          ].map(([e, t, d], i) => (
-            <Reveal key={t} delay={i * 70}>
+            [Palette, "Colours & sizes", "red, blue, big, small"],
+            [Hash, "Numbers", "one, three, ten"],
+            [PersonStanding, "Actions", "running, sitting, jumping"],
+            [MapPin, "Positions", "under, on, above, behind, in front of, beside, inside"],
+          ].map(([I, t, d], i) => (
+            <Reveal key={t as string} delay={i * 70}>
               <Spotlight>
-                <span className="mb-6 grid size-14 place-items-center rounded-2xl bg-accent-soft text-3xl" aria-hidden="true">
-                  {e}
+                <span className="mb-6 grid size-12 place-items-center rounded-2xl bg-accent-soft text-accent" aria-hidden="true">
+                  {(() => {
+                    const W = I as LucideIcon;
+                    return <W size={22} strokeWidth={1.75} />;
+                  })()}
                 </span>
-                <h3 className="mb-2 text-lg">{t}</h3>
-                <p className="text-ink-soft">{d}</p>
+                <h3 className="mb-2 text-lg">{t as string}</h3>
+                <p className="text-ink-soft">{d as string}</p>
               </Spotlight>
             </Reveal>
           ))}
         </div>
       </Container>
     </Section>
+  );
+}
+
+// Matches heroWorlds order in lib/apps.ts.
+const worldIcons: LucideIcon[] = [Rocket, Egg, Fish, Sparkles, Zap, TreePalm, Tractor, Trophy];
+
+const marks = {
+  "✅": { Icon: CircleCheck, cls: "text-emerald", label: "Yes" },
+  "❌": { Icon: CircleX, cls: "text-coral", label: "No" },
+  "⚠️": { Icon: TriangleAlert, cls: "text-gold", label: "Partly" },
+} as const;
+
+/** Comparison cell: a leading ✅ / ❌ / ⚠️ in the data becomes a proper icon. */
+function CompareCell({ value }: { value: string }) {
+  const m = value.match(/^(✅|❌|⚠️)s*(.*)$/u);
+  if (!m) return <>{value}</>;
+  const { Icon: I, cls, label } = marks[m[1] as keyof typeof marks];
+  return (
+    <span className="inline-flex items-start gap-2">
+      <I size={19} strokeWidth={2} className={cx("mt-[2px] shrink-0", cls)} aria-label={m[2] ? undefined : label} aria-hidden={m[2] ? true : undefined} />
+      {m[2] && <span>{m[2]}</span>}
+    </span>
   );
 }

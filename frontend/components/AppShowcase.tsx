@@ -4,7 +4,8 @@ import { useState } from "react";
 import { accent, type AppInfo } from "@/lib/apps";
 import { AppMark } from "./AppMark";
 import { phones } from "./Mockups";
-import { ButtonLink, CheckList, Chip, cx, emClass } from "./ui";
+import { StoreBadges } from "./StoreBadges";
+import { ButtonLink, CheckList, cx, emClass } from "./ui";
 
 /** Tabbed product showcase: pick an app on the left, see it on a large stage on the right. */
 export function AppShowcase({ apps }: { apps: AppInfo[] }) {
@@ -75,11 +76,7 @@ export function AppShowcase({ apps }: { apps: AppInfo[] }) {
           <p className="mb-7 text-ink-soft text-pretty">{app.summary}</p>
           <CheckList items={app.highlights} className="mb-8" />
           <div className="mt-auto">
-            <div className="mb-6 flex flex-wrap gap-2">
-              {app.platforms.map((p) => (
-                <Chip key={p}>{p}</Chip>
-              ))}
-            </div>
+            <StoreBadges app={app} className="mb-7" />
             <div className="flex flex-wrap gap-3">
               <ButtonLink href={`/apps/${app.slug}`} variant="accent">
                 Explore {app.name}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent, type ReactNode } from "react";
+import { apps } from "@/lib/apps";
 import { site } from "@/lib/site";
 import { ArrowChip, buttonClass } from "./ui";
 
@@ -53,9 +54,9 @@ export function ContactForm() {
         <Field id="app" label="Interested in">
           <select id="app" name="app" defaultValue="All apps" className={inputClass}>
             <option>All apps</option>
-            <option>Angel Talk</option>
-            <option>BloomLearn</option>
-            <option>Bloom Focus</option>
+            {apps.map((a) => (
+              <option key={a.slug}>{a.name}</option>
+            ))}
           </select>
         </Field>
       </div>

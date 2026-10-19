@@ -9,7 +9,11 @@ import {
   Leaf,
   Lock,
   Mail,
+  Play,
   ShieldCheck,
+  Timer,
+  Wallet,
+  WifiOff,
   Smile,
   Stethoscope,
   Users,
@@ -28,7 +32,6 @@ import {
   Badge,
   ButtonLink,
   Card,
-  Chip,
   Container,
   GlassCard,
   Kicker,
@@ -42,41 +45,54 @@ import {
 } from "@/components/ui";
 
 const stats: [string, string][] = [
-  ["3", "apps, one gentle journey"],
-  ["6", "languages in Angel Talk"],
+  ["4", "apps, one gentle journey"],
+  ["2", "languages: English & Arabic"],
   ["14.8k", "picture symbols"],
   ["15", "adaptive focus games"],
   ["40", "heroes in 8 worlds"],
 ];
 
-const marquee = ["English", "العربية", "اردو", "हिन्दी", "Español", "Français", "Parents", "Teachers", "Therapists", "Schools", "Clinics"];
+const marquee = ["English", "العربية", "Parents", "Teachers", "Therapists", "Schools", "Clinics", "Families"];
 
 const principles = [
   { Icon: Leaf, title: "Calm by design", text: "Soft colours, large targets, no flashing and no clutter. Sensory-friendly options are built in, not bolted on.", span: "lg:col-span-4" },
   { Icon: Compass, title: "Predictable and visual", text: "Layouts that stay the same, picture-first screens, visual schedules and social stories.", span: "lg:col-span-2" },
   { Icon: HandHeart, title: "The child leads", text: "Children tap, speak and play at their own pace. The apps follow the child.", span: "lg:col-span-2" },
-  { Icon: Languages, title: "Their home language", text: "Arabic and Urdu are first-class languages, alongside English, Hindi, Spanish and French, with two languages on one tile.", span: "lg:col-span-4" },
+  { Icon: Languages, title: "Their home language", text: "English and Arabic are both first-class languages, with full right-to-left support and two languages on one tile.", span: "lg:col-span-4" },
   { Icon: HeartHandshake, title: "Grown-ups, together", text: "Parent PINs, therapist tools and private messaging keep families, teachers and therapists connected.", span: "lg:col-span-3" },
   { Icon: Lock, title: "Private by default", text: "Boards and progress stay on the device wherever possible, and grown-up areas are locked behind a PIN or passcode.", span: "lg:col-span-3" },
+];
+
+const benefits = [
+  { Icon: Leaf, title: "Made for sensory needs", text: "Calm colours, no flashing, large targets and a Calm mode. Designed around how autistic children experience a screen." },
+  { Icon: Languages, title: "English & Arabic", text: "Both languages are first-class, with right-to-left layouts and English + Arabic on the same tile." },
+  { Icon: Play, title: "Try before you download", text: "Every app page has a live, interactive demo, so you can see exactly how it works first." },
+  { Icon: WifiOff, title: "Works offline", text: "The Angel Talk core board and BloomLearn's instant pictures work without internet." },
+  { Icon: ShieldCheck, title: "Private and kid-safe", text: "Boards and progress stay on the device wherever possible. BloomLearn and Bloom Focus are ad-free." },
+  { Icon: Wallet, title: "Affordable", text: "BloomLearn's core features are free, and Angel Talk has no subscription lock-in." },
+  { Icon: Timer, title: "Ready in minutes", text: "Set up Angel Talk in about 90 seconds, or build a whole board with one spoken sentence." },
+  { Icon: Users, title: "Home, school & therapy", text: "One family of apps that connects parents, teachers and therapists around the same child." },
 ];
 
 const who = [
   { Icon: Smile, title: "Children", text: "Autistic and non-verbal children, and children with speech delay, apraxia, Down syndrome, language or attention needs.", slugs: ["angel-talk", "bloomlearn", "bloom-focus"] },
   { Icon: Users, title: "Parents & families", text: "Set up in minutes, practise at home and see progress in plain language, in your own language.", slugs: ["angel-talk", "bloomlearn", "bloom-focus"] },
-  { Icon: GraduationCap, title: "Teachers & schools", text: "Classroom vocabulary, Grade 1–5 visual lessons, schedules and learning games.", slugs: ["angel-talk", "bloomlearn"] },
-  { Icon: Stethoscope, title: "Therapists & clinics", text: "Verb teaching, sentence building, activity builders, a game studio and insights.", slugs: ["angel-talk", "bloom-focus"] },
+  { Icon: GraduationCap, title: "Teachers & schools", text: "Classroom vocabulary, Grade 1–5 visual lessons, learning games, and classroom progress shared with the child's team.", slugs: ["angel-talk", "bloomlearn", "nexia-bridge"] },
+  { Icon: Stethoscope, title: "Therapists & clinics", text: "Verb teaching, activity builders and a game studio, plus one shared record for ABA, speech and OT teams.", slugs: ["angel-talk", "bloom-focus", "nexia-bridge"] },
 ];
 
 const guide = [
   { q: "My child can't speak yet, or speech is delayed", a: "Picture tiles that speak, full sentences, and a board in your home language.", slug: "angel-talk" },
   { q: "My child is learning words, positions, numbers or lessons", a: "Any sentence becomes a picture, plus visual maths and Grade 1–5 lessons.", slug: "bloomlearn" },
   { q: "Their therapist is working on attention and focus", a: "Adaptive focus games with heroes, guided by the therapist, played at home.", slug: "bloom-focus" },
+  { q: "Our therapy team or centre needs one shared record for each child", a: "Eight role-based portals for parents, therapists, teachers, supervisors and admins.", slug: "nexia-bridge" },
 ];
 
 const journey = [
   { slug: "angel-talk", verb: "Communicate", text: "Say what they need, feel and think." },
   { slug: "bloomlearn", verb: "Understand", text: "See what words and numbers really mean." },
   { slug: "bloom-focus", verb: "Focus", text: "Build attention, one playful game at a time." },
+  { slug: "nexia-bridge", verb: "Connect", text: "Bring the whole team around one shared picture." },
 ];
 
 const promise: [string, string][] = [
@@ -121,7 +137,7 @@ export default function Home() {
             <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-ink-soft">
               {[
                 [Leaf, "Sensory-friendly"],
-                [Languages, "English · العربية · اردو"],
+                [Languages, "English · العربية"],
                 [ShieldCheck, "Private by design"],
               ].map(([I, t]) => {
                 const Ico = I as typeof Leaf;
@@ -135,7 +151,7 @@ export default function Home() {
           </div>
 
           {/* Product stage */}
-          <div className="relative mx-auto h-[540px] w-full max-w-[600px] xl:max-w-none" aria-label="Screens from our three apps">
+          <div className="relative mx-auto h-[540px] w-full max-w-[600px] xl:max-w-none" aria-label="Screens from our apps">
             <div aria-hidden="true" className="absolute inset-x-4 top-8 bottom-0 rounded-[48px] border border-white/70 bg-white/35 shadow-lift backdrop-blur-sm">
               <div className="absolute inset-0 rounded-[48px] bg-dots opacity-50" />
             </div>
@@ -206,7 +222,7 @@ export default function Home() {
       {/* ───────────── Apps ───────────── */}
       <Section id="apps" tone="alt">
         <Container>
-          <SectionHead index="01" kicker="Our apps" title={<>Three apps. <span className={emClass}>One gentle</span> journey.</>}>
+          <SectionHead index="01" kicker="Our apps" title={<>Four apps. <span className={emClass}>One gentle</span> journey.</>}>
             Each app solves a different everyday challenge, and all of them share the same calm, child-first design.
           </SectionHead>
           <Reveal>
@@ -215,10 +231,39 @@ export default function Home() {
         </Container>
       </Section>
 
+      {/* ───────────── Benefits ───────────── */}
+      <Section id="benefits">
+        <Container>
+          <SectionHead index="02" kicker="Why choose us" title={<>What you get with <span className={emClass}>Hope Bridge</span></>}>
+            Every app is built around the same promises, so whichever one you choose, your child gets the same care.
+          </SectionHead>
+          <div className="grid gap-px overflow-hidden rounded-[32px] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+            {benefits.map(({ Icon, title, text }, i) => (
+              <Reveal key={title} delay={(i % 4) * 70} className="group bg-surface p-7 transition duration-500 hover:bg-bg sm:p-8">
+                <div className="mb-10 flex items-center justify-between">
+                  <span className="grid size-12 place-items-center rounded-2xl bg-brand-soft text-brand transition duration-500 group-hover:bg-brand group-hover:text-white">
+                    <Icon size={22} strokeWidth={1.75} aria-hidden="true" />
+                  </span>
+                  <span className="font-display text-sm text-muted italic">{String(i + 1).padStart(2, "0")}</span>
+                </div>
+                <h3 className="mb-2 text-lg">{title}</h3>
+                <p className="text-[0.95rem] text-ink-soft">{text}</p>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="mt-10 flex flex-wrap justify-center gap-3">
+            <ButtonLink href="#apps">Choose your app</ButtonLink>
+            <ButtonLink href="#contact" variant="ghost">
+              Ask for early access
+            </ButtonLink>
+          </Reveal>
+        </Container>
+      </Section>
+
       {/* ───────────── Finder ───────────── */}
       <Section>
         <Container className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-          <SectionHead align="left" index="02" kicker="Where to start" title={<>Find the right app <span className={emClass}>for your child</span></>} className="lg:sticky lg:top-32 lg:mb-0 lg:self-start">
+          <SectionHead align="left" index="03" kicker="Where to start" title={<>Find the right app <span className={emClass}>for your child</span></>} className="lg:sticky lg:top-32 lg:mb-0 lg:self-start">
             Start with the need, not the app. Each path below leads to the tool built for it.
           </SectionHead>
           <div className="divide-y divide-line border-y border-line">
@@ -261,7 +306,7 @@ export default function Home() {
         </div>
         <Container className="relative">
           <Reveal className="mb-16 max-w-[980px] md:mb-24">
-            <Kicker index="03" className="text-white/70">
+            <Kicker index="04" className="text-white/70">
               Our approach
             </Kicker>
             <p className="font-display text-[clamp(2rem,4.6vw,4rem)] leading-[1.06] tracking-[-0.03em] text-balance">
@@ -299,11 +344,11 @@ export default function Home() {
       {/* ───────────── Journey ───────────── */}
       <Section>
         <Container>
-          <SectionHead index="04" kicker="One family of apps" title={<>From first words to <span className={emClass}>focused learning</span></>}>
+          <SectionHead index="05" kicker="One family of apps" title={<>From first words to <span className={emClass}>focused learning</span></>}>
             Use one app or all three. Together they grow with the child.
           </SectionHead>
-          <div className="relative grid gap-5 md:grid-cols-3">
-            <div aria-hidden="true" className="absolute top-[52px] right-[17%] left-[17%] hidden h-px bg-linear-to-r from-violet via-emerald to-coral md:block" />
+          <div className="relative grid gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+            <div aria-hidden="true" className="absolute top-[52px] right-[12%] left-[12%] hidden h-px bg-linear-to-r from-violet via-emerald via-60% to-[#4f46e5] lg:block" />
             {journey.map((j, i) => {
               const a = byslug[j.slug];
               return (
@@ -312,7 +357,7 @@ export default function Home() {
                     <div className="relative mx-auto mb-7 grid size-[104px] place-items-center rounded-full border border-line bg-surface shadow-lift transition duration-500 group-hover:-translate-y-1">
                       <AppMark app={a} size="lg" />
                     </div>
-                    <p className="mb-1 font-display text-sm text-muted italic">Step {["one", "two", "three"][i]}</p>
+                    <p className="mb-1 font-display text-sm text-muted italic">Step {["one", "two", "three", "four"][i]}</p>
                     <h3 className="mb-2 font-display text-3xl font-medium tracking-[-0.02em]">{j.verb}</h3>
                     <p className="mx-auto mb-3 max-w-[260px] text-ink-soft">{j.text}</p>
                     <span className="inline-flex items-center gap-1 text-sm font-semibold text-accent">
@@ -329,23 +374,32 @@ export default function Home() {
       {/* ───────────── Who ───────────── */}
       <Section id="who" tone="alt">
         <Container>
-          <SectionHead index="05" kicker="Who we serve" title={<>For the child, and <span className={emClass}>everyone</span> who helps them</>} />
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <SectionHead index="06" kicker="Who we serve" title={<>For the child, and <span className={emClass}>everyone</span> who helps them</>} />
+          <div className="grid gap-4 lg:grid-cols-2">
             {who.map(({ Icon, title, text, slugs }, i) => (
-              <Reveal key={title} delay={i * 80}>
-                <Spotlight className="flex flex-col">
-                  <div className="flex h-full flex-col">
-                    <span className="mb-8 grid size-12 place-items-center rounded-2xl bg-brand-soft text-brand">
-                      <Icon size={22} strokeWidth={1.75} aria-hidden="true" />
+              <Reveal key={title} delay={(i % 2) * 80}>
+                <Spotlight>
+                  <div className="flex h-full flex-col gap-5 sm:flex-row sm:gap-6 lg:flex-col xl:flex-row">
+                    <span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-brand-soft text-brand">
+                      <Icon size={24} strokeWidth={1.75} aria-hidden="true" />
                     </span>
-                    <h3 className="mb-2 text-xl">{title}</h3>
-                    <p className="mb-6 flex-1 text-ink-soft">{text}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {slugs.map((s) => (
-                        <Link key={s} href={`/apps/${s}`} className="no-underline">
-                          <Chip className="transition hover:border-ink/30 hover:text-ink">{byslug[s].name}</Chip>
-                        </Link>
-                      ))}
+                    <div className="flex min-w-0 flex-1 flex-col">
+                      <h3 className="mb-2 text-xl">{title}</h3>
+                      <p className="mb-6 flex-1 text-ink-soft">{text}</p>
+                      {/* All of a group's apps sit on one line. */}
+                      <div className="flex flex-wrap gap-1.5 min-[360px]:flex-nowrap sm:gap-2">
+                        {slugs.map((s) => (
+                          <Link
+                            key={s}
+                            href={`/apps/${s}`}
+                            style={accent(byslug[s].accent)}
+                            className="inline-flex shrink-0 items-center gap-2 rounded-full border border-line bg-bg px-2.5 py-1 text-[0.75rem] font-semibold whitespace-nowrap text-ink-soft no-underline transition hover:border-accent hover:text-ink sm:py-1.5 sm:pr-3.5 sm:pl-2 sm:text-[0.84rem]"
+                          >
+                            <span aria-hidden="true" className="hidden size-2.5 rounded-full bg-accent sm:block" />
+                            {byslug[s].name}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </Spotlight>
@@ -358,7 +412,7 @@ export default function Home() {
       {/* ───────────── Promise ───────────── */}
       <Section id="promise">
         <Container className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-          <SectionHead align="left" index="06" kicker="Our promise" title={<>Honest technology for families <span className={emClass}>who trust us</span></>} className="lg:mb-0" />
+          <SectionHead align="left" index="07" kicker="Our promise" title={<>Honest technology for families <span className={emClass}>who trust us</span></>} className="lg:mb-0" />
           <div className="grid gap-px overflow-hidden rounded-[28px] border border-line bg-line sm:grid-cols-2">
             {promise.map(([t, d], i) => (
               <Reveal key={t} delay={i * 70} className="bg-surface p-7 sm:p-9">
@@ -375,7 +429,7 @@ export default function Home() {
       <Section id="contact" tone="alt">
         <Container className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <Reveal>
-            <Kicker index="07">Contact</Kicker>
+            <Kicker index="08">Contact</Kicker>
             <h2 className={h2Class}>
               We&apos;d love to <span className={emClass}>hear from you</span>
             </h2>

@@ -1,8 +1,10 @@
 import {
   Award,
   BookOpen,
+  Building2,
   Calculator,
   ChartColumn,
+  ClipboardList,
   Heart,
   Image,
   LayoutGrid,
@@ -16,6 +18,7 @@ import {
   Sparkles,
   Star,
   TrendingUp,
+  Users,
   type LucideProps,
 } from "lucide-react";
 
@@ -23,8 +26,10 @@ import {
 const icons = {
   Award,
   BookOpen,
+  Building2,
   Calculator,
   ChartColumn,
+  ClipboardList,
   Heart,
   Image,
   LayoutGrid,
@@ -38,6 +43,7 @@ const icons = {
   Sparkles,
   Star,
   TrendingUp,
+  Users,
 };
 
 export type IconName = keyof typeof icons;

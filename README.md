@@ -2,9 +2,10 @@
 
 Promotion website for Hope Bridge Digital's apps for autistic children and their families:
 
-- **Angel Talk**: AAC talk board in English, Arabic, Urdu, Hindi, Spanish and French
+- **Angel Talk**: AAC talk board in English and Arabic
 - **BloomLearn**: turns spoken or typed sentences into pictures
 - **Bloom Focus**: therapist-guided, adaptive attention games
+- **Nexia Bridge**: therapy and education platform where the child's whole team shares one record, with a portal per role
 
 Each app page includes a live, interactive demo.
 

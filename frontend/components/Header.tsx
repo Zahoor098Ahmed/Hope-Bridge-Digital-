@@ -11,6 +11,7 @@ const links = [
   { href: "/apps/angel-talk", label: "Angel Talk" },
   { href: "/apps/bloomlearn", label: "BloomLearn" },
   { href: "/apps/bloom-focus", label: "Bloom Focus" },
+  { href: "/apps/nexia-bridge", label: "Nexia Bridge" },
   { href: "/#approach", label: "Approach" },
   { href: "/#contact", label: "Contact" },
 ];

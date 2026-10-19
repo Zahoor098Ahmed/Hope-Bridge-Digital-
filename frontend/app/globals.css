@@ -98,6 +98,17 @@
   }
 
   html { scroll-behavior: smooth; }
+
+  /*
+   * Desktop scale: laptops and monitors narrower than ~1880px show the whole site at the same
+   * compact proportions a 1880px-wide screen gets at 100% zoom. Phones and tablets are unaffected.
+   */
+  @media (min-width: 1280px) and (max-width: 1399.98px) { html { zoom: 0.72; } }
+  @media (min-width: 1400px) and (max-width: 1499.98px) { html { zoom: 0.77; } }
+  @media (min-width: 1500px) and (max-width: 1599.98px) { html { zoom: 0.82; } }
+  @media (min-width: 1600px) and (max-width: 1759.98px) { html { zoom: 0.87; } }
+  @media (min-width: 1760px) and (max-width: 1879.98px) { html { zoom: 0.94; } }
+
   body {
     @apply bg-bg font-sans text-[17px] leading-relaxed text-ink antialiased overflow-x-hidden;
     font-feature-settings: "ss01", "cv11";
