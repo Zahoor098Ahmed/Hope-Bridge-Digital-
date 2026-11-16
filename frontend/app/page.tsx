@@ -4,24 +4,27 @@ import {
   Compass,
   GraduationCap,
   HandHeart,
+  Heart,
   HeartHandshake,
   Languages,
   Leaf,
   Lock,
   Mail,
+  Moon,
   Play,
   ShieldCheck,
-  Timer,
-  Wallet,
-  WifiOff,
   Smile,
+  Sparkles,
   Stethoscope,
+  Timer,
   Users,
   Volume2,
+  Wallet,
+  WifiOff,
 } from "lucide-react";
 import { apps, accent } from "@/lib/apps";
 import { site } from "@/lib/site";
-import { AngelTalkPhone, BloomFocusPhone, BloomLearnPhone } from "@/components/Mockups";
+import { HeroDeviceShowcase } from "@/components/HeroDeviceShowcase";
 import { AppMark } from "@/components/AppMark";
 import { AppShowcase } from "@/components/AppShowcase";
 import { CalmButton } from "@/components/CalmButton";
@@ -83,14 +86,14 @@ const who = [
 
 const guide = [
   { q: "My child can't speak yet, or speech is delayed", a: "Picture tiles that speak, full sentences, and a board in your home language.", slug: "angel-talk" },
-  { q: "My child is learning words, positions, numbers or lessons", a: "Any sentence becomes a picture, plus visual maths and Grade 1–5 lessons.", slug: "bloomlearn" },
+  { q: "My child is learning words, positions, science or math", a: "Interactive visual scenes, video-ready lessons, math stages, and 13 Grade 3 Science chapters.", slug: "bloomlearn" },
   { q: "Their therapist is working on attention and focus", a: "Adaptive focus games with heroes, guided by the therapist, played at home.", slug: "bloom-focus" },
   { q: "Our therapy team or centre needs one shared record for each child", a: "Eight role-based portals for parents, therapists, teachers, supervisors and admins.", slug: "nexia-bridge" },
 ];
 
 const journey = [
   { slug: "angel-talk", verb: "Communicate", text: "Say what they need, feel and think." },
-  { slug: "bloomlearn", verb: "Understand", text: "See what words and numbers really mean." },
+  { slug: "bloomlearn", verb: "Understand", text: "See what words, science and numbers really mean." },
   { slug: "bloom-focus", verb: "Focus", text: "Build attention, one playful game at a time." },
   { slug: "nexia-bridge", verb: "Connect", text: "Bring the whole team around one shared picture." },
 ];
@@ -150,41 +153,8 @@ export default function Home() {
             </ul>
           </div>
 
-          {/* Product stage */}
-          <div className="relative mx-auto h-[540px] w-full max-w-[600px] xl:max-w-none" aria-label="Screens from our apps">
-            <div aria-hidden="true" className="absolute inset-x-4 top-8 bottom-0 rounded-[48px] border border-white/70 bg-white/35 shadow-lift backdrop-blur-sm">
-              <div className="absolute inset-0 rounded-[48px] bg-dots opacity-50" />
-            </div>
-            <AngelTalkPhone className="absolute top-[86px] left-[2%] hidden origin-bottom-left -rotate-[8deg] scale-[0.8] animate-float sm:block" />
-            <BloomFocusPhone className="absolute top-[86px] right-[2%] hidden origin-bottom-right rotate-[8deg] scale-[0.8] animate-float [animation-delay:-3.5s] sm:block" />
-            <BloomLearnPhone className="absolute top-0 left-1/2 z-10 -translate-x-1/2" />
-
-            <GlassCard className="absolute top-[44%] left-0 z-20 hidden w-[200px] animate-float sm:block [animation-delay:-1s] sm:left-[-4%]">
-              <div className="mb-1.5 flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-[#6e7191]">
-                <Volume2 size={13} className="text-violet" aria-hidden="true" /> Angel Talk · spoken
-              </div>
-              <p className="font-display text-[1.05rem] leading-snug italic">“I want water, please.”</p>
-            </GlassCard>
-            <GlassCard className="absolute right-0 bottom-[16%] z-20 w-[200px] animate-float [animation-delay:-4s] sm:right-[-2%]">
-              <div className="mb-2 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-[#6e7191]">How do you feel?</div>
-              <div className="flex gap-1.5 text-2xl">
-                {["😊", "😌", "😴", "😟"].map((f) => (
-                  <span key={f} className="grid size-10 place-items-center rounded-xl bg-[#f6f4ff]">
-                    {f}
-                  </span>
-                ))}
-              </div>
-            </GlassCard>
-            <GlassCard className="absolute top-[4%] right-[-2%] z-20 hidden items-center gap-3 sm:flex">
-              <span className="grid size-9 place-items-center rounded-full bg-mint text-emerald">
-                <Leaf size={17} aria-hidden="true" />
-              </span>
-              <span className="text-sm leading-tight font-semibold">
-                Calm mode
-                <span className="block text-xs font-medium text-[#6e7191]">No flashing, ever</span>
-              </span>
-            </GlassCard>
-          </div>
+          {/* Interactive 3D Device Showcase */}
+          <HeroDeviceShowcase />
         </Container>
       </section>
 

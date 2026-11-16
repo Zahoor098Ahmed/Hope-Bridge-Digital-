@@ -71,6 +71,15 @@
   background-size: 22px 22px;
 }
 
+/* Hide default OS scrollbars while preserving touch and wheel scrolling */
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @layer base {
   :root {
     --accent: var(--color-brand);

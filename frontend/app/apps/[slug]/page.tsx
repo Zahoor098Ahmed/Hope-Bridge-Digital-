@@ -6,8 +6,13 @@ import {
   CircleCheck,
   CircleX,
   Egg,
+  Film,
   Fish,
+  Folder,
+  FolderTree,
+  Footprints,
   Hash,
+  Layers,
   MapPin,
   Palette,
   PersonStanding,
@@ -18,12 +23,23 @@ import {
   TreePalm,
   TriangleAlert,
   Trophy,
+  Video,
   Volume2,
   Zap,
   type LucideIcon,
 } from "lucide-react";
-import { apps, accent, focusGames, getApp, heroWorlds, type AppInfo } from "@/lib/apps";
-import { phones } from "@/components/Mockups";
+import {
+  apps,
+  accent,
+  bloomScienceChapters,
+  bloomVideoFeatures,
+  focusGames,
+  getApp,
+  heroWorlds,
+  type AppInfo,
+} from "@/lib/apps";
+import { AppPhone } from "@/components/Mockups";
+import { BloomLearnSubjectShowcase } from "@/components/BloomLearnSubjectShowcase";
 import { AppMark } from "@/components/AppMark";
 import { Icon } from "@/components/Icon";
 import { Reveal } from "@/components/Reveal";
@@ -96,8 +112,8 @@ const heroNotes: Record<AppInfo["slug"], [string, string][]> = {
     ["Two languages, one tile", "English + Arabic"],
   ],
   bloomlearn: [
-    ["Understands", "under · on · behind · beside"],
-    ["Maths you can see", "5 apples − 3 apples = ?"],
+    ["Video-Ready AI", "Cinematic prompts & cutaways"],
+    ["13 Science chapters", "Grade 3 master curriculum"],
   ],
   "bloom-focus": [
     ["Always just right", "Steps up above 85% accuracy"],
@@ -113,7 +129,6 @@ export default async function AppPage({ params }: Props) {
   const app = getApp((await params).slug);
   if (!app) notFound();
 
-  const PhoneEl = phones[app.slug];
   const { Demo, title, text } = demos[app.slug];
   const others = apps.filter((a) => a.slug !== app.slug);
   const [noteA, noteB] = heroNotes[app.slug];
@@ -193,30 +208,39 @@ export default async function AppPage({ params }: Props) {
           </div>
 
           {/* Stage */}
-          <div className="relative mx-auto w-full max-w-[560px]">
-            <div className="relative isolate flex min-h-[560px] items-center justify-center overflow-hidden rounded-[44px] border border-white/60 bg-[linear-gradient(160deg,var(--accent-soft),color-mix(in_srgb,var(--accent)_26%,var(--color-surface)))] shadow-lift">
-              <div aria-hidden="true" className="absolute inset-0 -z-10 bg-dots opacity-60" />
-              <div aria-hidden="true" className="absolute top-1/2 left-1/2 -z-10 size-[400px] -translate-1/2 rounded-full bg-accent/30 blur-[90px]" />
-              <PhoneEl className="animate-float" />
+          {app.slug === "bloomlearn" ? (
+            <BloomLearnSubjectShowcase />
+          ) : (
+            <div className="relative mx-auto w-full max-w-[560px]">
+              <div className="relative isolate flex min-h-[580px] items-center justify-center overflow-hidden rounded-[44px] border border-white/60 bg-[linear-gradient(160deg,var(--accent-soft),color-mix(in_srgb,var(--accent)_26%,var(--color-surface)))] p-4 shadow-lift">
+                <div aria-hidden="true" className="absolute inset-0 -z-10 bg-dots opacity-60" />
+                <div aria-hidden="true" className="absolute top-1/2 left-1/2 -z-10 size-[400px] -translate-1/2 rounded-full bg-accent/30 blur-[90px]" />
+                <AppPhone slug={app.slug} className="animate-float z-10" />
+              </div>
+
+              {/* Feature highlights placed cleanly below stage - never overlaps phone */}
+              <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <GlassCard className="transition-all duration-300 hover:shadow-lift">
+                  <div className="mb-1 flex items-center gap-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-[#6e7191]">
+                    {app.slug === "angel-talk" ? (
+                      <Volume2 size={12} aria-hidden="true" style={{ color: app.accent }} />
+                    ) : (
+                      <Sparkles size={12} aria-hidden="true" style={{ color: app.accent }} />
+                    )}{" "}
+                    {noteA[0]}
+                  </div>
+                  <p className="font-display text-[0.98rem] leading-snug italic text-ink">{noteA[1]}</p>
+                </GlassCard>
+
+                <GlassCard className="transition-all duration-300 hover:shadow-lift">
+                  <div className="mb-1 flex items-center gap-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-[#6e7191]">
+                    <Sparkles size={12} aria-hidden="true" style={{ color: app.accent }} /> {noteB[0]}
+                  </div>
+                  <p className="text-[0.92rem] leading-snug font-semibold text-ink">{noteB[1]}</p>
+                </GlassCard>
+              </div>
             </div>
-            <GlassCard className="absolute top-[40%] -left-2 z-10 max-w-[220px] sm:-left-8">
-              <div className="mb-1 flex items-center gap-1.5 text-[0.66rem] font-semibold uppercase tracking-[0.14em] text-[#6e7191]">
-                {app.slug === "angel-talk" ? (
-                  <Volume2 size={12} aria-hidden="true" style={{ color: app.accent }} />
-                ) : (
-                  <Sparkles size={12} aria-hidden="true" style={{ color: app.accent }} />
-                )}{" "}
-                {noteA[0]}
-              </div>
-              <p className="font-display text-[1.02rem] leading-snug italic">{noteA[1]}</p>
-            </GlassCard>
-            <GlassCard className="absolute -right-2 bottom-12 z-10 max-w-[230px] sm:-right-8">
-              <div className="mb-1 flex items-center gap-1.5 text-[0.66rem] font-semibold uppercase tracking-[0.14em] text-[#6e7191]">
-                <Sparkles size={12} aria-hidden="true" style={{ color: app.accent }} /> {noteB[0]}
-              </div>
-              <p className="text-[0.95rem] leading-snug font-semibold">{noteB[1]}</p>
-            </GlassCard>
-          </div>
+          )}
         </Container>
       </section>
 
@@ -519,10 +543,10 @@ function Extras({ app }: { app: AppInfo }) {
                     <span className="absolute top-2.5 right-2.5 rounded-full px-2 py-0.5 text-[0.68rem] font-bold text-white" style={{ background: c }}>
                       {b}
                     </span>
-                    <div className="text-[2.2rem]" aria-hidden="true">
-                      🚶
+                    <div className="flex justify-center text-accent" aria-hidden="true">
+                      <PersonStanding size={34} />
                     </div>
-                    <b className="mt-1 block text-lg">{w}</b>
+                    <b className="mt-2 block text-lg">{w}</b>
                   </div>
                 ))}
               </div>
@@ -535,24 +559,28 @@ function Extras({ app }: { app: AppInfo }) {
                 Build a whole board <span className={emClass}>by speaking</span>
               </h2>
               <q className="mb-6 block rounded-2xl bg-accent-soft p-5 font-display text-lg leading-snug italic">
-                category fruits, sub category citrus, words orange and lemon, sub category berries, words strawberry and grapes
+                “category fruits, sub category citrus, words orange and lemon, sub category berries, words strawberry and grapes”
               </q>
-              <ul className="font-semibold">
-                <li>
-                  🗂️ Fruits
+              <ul className="font-semibold text-ink">
+                <li className="flex items-center gap-2">
+                  <FolderTree size={16} className="text-accent" /> Fruits
                   <ul className={treeList}>
                     <li className="py-1">
-                      🍋 Citrus
+                      <span className="inline-flex items-center gap-1.5 font-medium text-ink-soft">
+                        <Folder size={14} className="text-amber-500" /> Citrus
+                      </span>
                       <ul className={treeList}>
-                        <li className="py-1">🍊 Orange</li>
-                        <li className="py-1">🍋 Lemon</li>
+                        <li className="py-1 text-sm font-normal text-ink">Orange</li>
+                        <li className="py-1 text-sm font-normal text-ink">Lemon</li>
                       </ul>
                     </li>
                     <li className="py-1">
-                      🍓 Berries
+                      <span className="inline-flex items-center gap-1.5 font-medium text-ink-soft">
+                        <Folder size={14} className="text-rose-500" /> Berries
+                      </span>
                       <ul className={treeList}>
-                        <li className="py-1">🍓 Strawberry</li>
-                        <li className="py-1">🍇 Grapes</li>
+                        <li className="py-1 text-sm font-normal text-ink">Strawberry</li>
+                        <li className="py-1 text-sm font-normal text-ink">Grapes</li>
                       </ul>
                     </li>
                   </ul>
@@ -627,6 +655,171 @@ function Extras({ app }: { app: AppInfo }) {
                   <b className="block font-semibold">{g}</b>
                   <span className="text-[0.86rem] text-muted">{s}</span>
                 </div>
+              ))}
+            </div>
+          </Container>
+        </Section>
+      </>
+    );
+  }
+
+  if (app.slug === "bloomlearn") {
+    return (
+      <>
+        {/* ───────────── Video-Ready Learning Engine ───────────── */}
+        <Section>
+          <Container>
+            <SectionHead
+              kicker="Video-Ready AI Engine"
+              title={<>Cinematic storyboard prompts & <span className={emClass}>scientific cutaways</span></>}
+            >
+              Engineered as a live storyboard generator for next-generation text-to-video AI models like Sora, Runway Gen-3,
+              Luma Dream Machine, Kling, and Pika. Every lesson includes calibrated prompts, camera motion directives,
+              and child-safe scientific perspectives.
+            </SectionHead>
+
+            <div className="mb-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {bloomVideoFeatures.map((f, i) => (
+                <Reveal key={f.title} delay={i * 70}>
+                  <Spotlight className="h-full">
+                    <span className="mb-6 grid size-12 place-items-center rounded-2xl bg-accent-soft text-accent" aria-hidden="true">
+                      {i === 0 && <Video size={22} strokeWidth={1.75} />}
+                      {i === 1 && <Film size={22} strokeWidth={1.75} />}
+                      {i === 2 && <Layers size={22} strokeWidth={1.75} />}
+                      {i === 3 && <CircleCheck size={22} strokeWidth={1.75} />}
+                    </span>
+                    <h3 className="mb-2 text-lg font-semibold">{f.title}</h3>
+                    <p className="text-[0.92rem] leading-relaxed text-ink-soft">{f.detail}</p>
+                  </Spotlight>
+                </Reveal>
+              ))}
+            </div>
+
+            {/* Live Video Prompt Card Preview */}
+            <Reveal delay={200}>
+              <div className="rounded-[28px] border border-line bg-surface p-6 shadow-soft sm:p-8">
+                <div className="mb-5 flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4">
+                  <div className="flex items-center gap-2.5">
+                    <span className="grid size-9 place-items-center rounded-xl bg-accent-soft text-accent">
+                      <Film size={18} />
+                    </span>
+                    <div>
+                      <span className="text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-muted">Curriculum Video Spec</span>
+                      <h4 className="text-base font-semibold">sc3-plants · Chapter 1: Root Hydration & Growth</h4>
+                    </div>
+                  </div>
+                  <Chip className="bg-accent-soft text-xs font-semibold text-accent flex items-center gap-1.5">
+                    <Film size={12} />
+                    <span>Video-Ready Metadata</span>
+                  </Chip>
+                </div>
+
+                <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
+                  <div className="rounded-2xl border border-line bg-bg p-5 font-mono text-[0.88rem] leading-relaxed text-ink-soft">
+                    <div className="mb-2 font-sans text-xs font-semibold uppercase tracking-wider text-muted">Video Prompt (`video` field):</div>
+                    <p className="text-ink">
+                      &quot;Macro underground split-view cutaway. Camera tilts down smoothly into dark, aerated humus soil.
+                      Translucent plant root hairs absorb glowing water droplets from moist soil particles. Earthworm moves gently in
+                      the background. Diffused, calm educational lighting; slow-motion fluid transport up xylem vessels. Child-safe,
+                      peaceful pacing, zero sensory overload.&quot;
+                    </p>
+                  </div>
+                  <div className="flex flex-col justify-between gap-3 rounded-2xl border border-line bg-accent-soft/40 p-5 text-sm">
+                    <div>
+                      <span className="mb-2 block text-xs font-bold uppercase tracking-wider text-accent">Engine Directives:</span>
+                      <ul className="grid gap-2 text-[0.86rem] text-ink-soft">
+                        <li className="flex items-start gap-2">
+                          <span className="mt-1 size-1.5 shrink-0 rounded-full bg-accent" />
+                          <span><strong>Camera:</strong> Slow macro track-in with vertical split-view</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="mt-1 size-1.5 shrink-0 rounded-full bg-accent" />
+                          <span><strong>Perspective:</strong> Sub-surface cutaway of soil horizons</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="mt-1 size-1.5 shrink-0 rounded-full bg-accent" />
+                          <span><strong>Guardrails:</strong> Non-violent, calm pacing, sensory-friendly</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="border-t border-line/60 pt-3 text-xs text-muted">
+                      Ready for direct integration with Sora, Runway Gen-3, Luma & Kling pipelines.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </Container>
+        </Section>
+
+        {/* ───────────── 13 Science Chapters Curriculum ───────────── */}
+        <Section tone="alt">
+          <Container>
+            <SectionHead
+              kicker="Grade 3 Science Deep-Dive"
+              title={<>13 Complete <span className={emClass}>Master Chapters</span></>}
+            >
+              Standard-aligned across Saudi MOE, Cambridge Primary, Oxford, and McGraw-Hill. Each chapter contains
+              multi-part paragraph lessons with dedicated active recall Q&amp;A, on-device ARASAAC scene specs, and video prompts.
+            </SectionHead>
+
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {bloomScienceChapters.map((ch, i) => (
+                <Reveal key={ch.id} delay={(i % 4) * 50}>
+                  <Spotlight className="flex h-full flex-col justify-between">
+                    <div>
+                      <div className="mb-4 flex items-center justify-between">
+                        <span className="rounded-md bg-accent-soft px-2 py-0.5 font-mono text-[0.72rem] font-bold text-accent">
+                          Ch {String(ch.number).padStart(2, "0")}
+                        </span>
+                        <span className="font-mono text-[0.72rem] text-muted">{ch.code}</span>
+                      </div>
+                      <h3 className="mb-2 text-lg font-semibold leading-snug">{ch.title}</h3>
+                      <p className="mb-4 text-[0.88rem] leading-relaxed text-ink-soft">{ch.description}</p>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5 border-t border-line/60 pt-3">
+                      {ch.concepts.map((c) => (
+                        <span key={c} className="rounded-md bg-bg px-2 py-0.5 text-[0.74rem] font-medium text-muted">
+                          {c}
+                        </span>
+                      ))}
+                    </div>
+                  </Spotlight>
+                </Reveal>
+              ))}
+            </div>
+          </Container>
+        </Section>
+
+        {/* ───────────── Words & Concepts It Understands ───────────── */}
+        <Section>
+          <Container>
+            <SectionHead
+              kicker="Natural Language Understanding"
+              title={<>Colours, numbers, actions <span className={emClass}>and positions</span></>}
+            >
+              Speak or type freely in English or Arabic. BloomLearn parses the grammatical relationships, spatial prepositions,
+              and quantities to assemble the exact visual stage.
+            </SectionHead>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                [Palette, "Colours & sizes", "red, blue, big, small, tiny, giant"],
+                [Hash, "Numbers & math", "1 to 100, equations, word problems"],
+                [PersonStanding, "Actions & verbs", "running, sitting, jumping, growing"],
+                [MapPin, "Spatial positions", "under, on, above, behind, in front of, beside, inside"],
+              ].map(([I, t, d], i) => (
+                <Reveal key={t as string} delay={i * 70}>
+                  <Spotlight>
+                    <span className="mb-6 grid size-12 place-items-center rounded-2xl bg-accent-soft text-accent" aria-hidden="true">
+                      {(() => {
+                        const W = I as LucideIcon;
+                        return <W size={22} strokeWidth={1.75} />;
+                      })()}
+                    </span>
+                    <h3 className="mb-2 text-lg font-semibold">{t as string}</h3>
+                    <p className="text-ink-soft">{d as string}</p>
+                  </Spotlight>
+                </Reveal>
               ))}
             </div>
           </Container>

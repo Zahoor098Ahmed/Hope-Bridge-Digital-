@@ -7,6 +7,7 @@ import {
   ClipboardList,
   Heart,
   Image,
+  Layers,
   LayoutGrid,
   MessageCircle,
   MessagesSquare,
@@ -19,6 +20,7 @@ import {
   Star,
   TrendingUp,
   Users,
+  Video,
   type LucideProps,
 } from "lucide-react";
 
@@ -32,6 +34,7 @@ const icons = {
   ClipboardList,
   Heart,
   Image,
+  Layers,
   LayoutGrid,
   MessageCircle,
   MessagesSquare,
@@ -44,6 +47,7 @@ const icons = {
   Star,
   TrendingUp,
   Users,
+  Video,
 };
 
 export type IconName = keyof typeof icons;

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { accent, type AppInfo } from "@/lib/apps";
 import { AppMark } from "./AppMark";
-import { phones } from "./Mockups";
+import { AppPhone } from "./Mockups";
 import { StoreBadges } from "./StoreBadges";
 import { ButtonLink, CheckList, cx, emClass } from "./ui";
 
@@ -11,7 +11,6 @@ import { ButtonLink, CheckList, cx, emClass } from "./ui";
 export function AppShowcase({ apps }: { apps: AppInfo[] }) {
   const [active, setActive] = useState(0);
   const app = apps[active];
-  const PhoneEl = phones[app.slug];
 
   return (
     <div className="grid gap-5 lg:grid-cols-[320px_1fr] lg:gap-6">
@@ -92,7 +91,7 @@ export function AppShowcase({ apps }: { apps: AppInfo[] }) {
         <div className="relative isolate flex min-h-[460px] items-center justify-center overflow-hidden bg-[linear-gradient(160deg,var(--accent-soft),color-mix(in_srgb,var(--accent)_22%,var(--color-surface)))] p-8">
           <div aria-hidden="true" className="absolute inset-0 -z-10 bg-dots opacity-60" />
           <div aria-hidden="true" className="absolute top-1/2 left-1/2 -z-10 size-[380px] -translate-1/2 rounded-full bg-accent/25 blur-[80px]" />
-          <PhoneEl className="scale-[0.92] sm:scale-100" />
+          <AppPhone slug={app.slug} className="scale-[0.92] sm:scale-100" />
         </div>
       </div>
     </div>

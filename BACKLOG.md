@@ -105,7 +105,7 @@
 
 ## 2026-10-19
 
-- **11:49:24 – 12:07:30** ⏱️ Active Coding Session (**18 min**)
+- **11:49:24 – 12:11:11** ⏱️ Active Coding Session (**22 min**)
   - 📁 **Files Worked On (26):**
     - `.gitignore`
     - `README.md`
@@ -133,3 +133,44 @@
     - `README.md.tmp.6256.66ebcb217781`
     - `frontend/components/ContactForm.tsx.tmp.6256.ddd9038f6d13`
     - `frontend/components/ContactForm.tsx`
+
+- **12:32:26 – 12:49:24** ⏱️ Active Coding Session (**17 min**)
+  - 📁 **Files Worked On (1):**
+    - `.gitignore`
+
+## 2026-11-16
+
+- **14:49:49 – 15:21:10** ⏱️ Active Coding Session (**31 min**)
+  - 📁 **Files Worked On (11):**
+    - `.gitignore`
+    - `README.md`
+    - `frontend/next-env.d.ts`
+    - `frontend/components/Icon.tsx`
+    - `frontend/lib/apps.ts`
+    - `frontend/app/apps/[slug]/page.tsx`
+    - `frontend/components/demos/BloomLearnDemo.tsx`
+    - `frontend/app/page.tsx`
+    - `frontend/lib/speak.ts`
+    - `frontend/components/Mockups.tsx`
+    - `frontend/components/AppShowcase.tsx`
+
+- **15:29:40 – 15:38:36** ⏱️ Active Coding Session (**9 min**)
+  - 📁 **Files Worked On (6):**
+    - `frontend/app/apps/[slug]/page.tsx`
+    - `frontend/components/AppShowcase.tsx`
+    - `frontend/components/Mockups.tsx`
+    - `frontend/components/demos/BloomLearnDemo.tsx`
+    - `frontend/lib/speak.ts`
+    - `frontend/app/globals.css`
+
+- **15:44:00 – 16:27:50** ⏱️ Active Coding Session (**44 min**)
+  - 📁 **Files Worked On (9):**
+    - `frontend/components/demos/BloomLearnDemo.tsx`
+    - `frontend/app/apps/[slug]/page.tsx`
+    - `frontend/components/Mockups.tsx`
+    - `frontend/app/page.tsx`
+    - `.gitignore`
+    - `frontend/components/demos/AngelTalkDemo.tsx`
+    - `frontend/components/HeroDeviceShowcase.tsx`
+    - `frontend/lib/apps.ts`
+    - `frontend/components/BloomLearnSubjectShowcase.tsx`
